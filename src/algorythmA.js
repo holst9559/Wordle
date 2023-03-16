@@ -1,12 +1,15 @@
-const guess = "Hej";
-const answer = "Hej";
+const guess = "Kaffe";
+const answer = "Kaffe";
 
 export default function algoA(guess, answer) {
-  const humanGuess = guess;
-  const machineAnswer = answer;
+  const humanGuess = guess.toLowerCase();
+  const word = answer.toLowerCase();
 
-  if (humanGuess == machineAnswer) {
-    return true;
+  const humanArray = humanGuess.split("");
+  const wordArray = word.split("");
+
+  if (humanGuess == word) {
+    return humanArray;
   } else {
     return false;
   }
