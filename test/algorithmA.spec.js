@@ -2,9 +2,11 @@ import { describe, expect, it } from "@jest/globals";
 import algoA from "../src/algorithmA";
 
 /* 
-  Övergripande teststrategi.
-    Bryta ut och testa de olika momenten i funktionen, 
-    även hantera felmeddelanden så som för långa eller för korta ord.
+  Testing strategy
+    Break out and test the different moments in the function.
+    A way to isolate different parts of the code I can move on to 
+    different parts when I know things works properly. 
+    I also want to be able to check for wrong inputs from the user.
 */
 
 describe("algoA()", () => {
@@ -23,16 +25,32 @@ describe("algoA()", () => {
 
   //Test to check the index of the guessed word compared to the correct word
   test("Checks if the letters are in the right position", () => {
-    expect(result).toBe();
+    expect(result[0].result).toBe("Correct");
+    expect(result[1].result).toBe("Incorrect");
+    expect(result[2].result).toBe("Misplaced");
+    expect(result[3].result).toBe("Misplaced");
+    expect(result[4].result).toBe("Incorrect");
   });
+
+  test("Check if a misplaced letter is already in use somewhere else", () => {});
 });
 
 /* 
-  1. Break out the letters into an array
-    1.1 Transform into lowercase
-  2. Compare the arrays and return index position 
-  3. Convert the letters to objects
-    3.1 Give the letters the right attribute
-  4. Return the guess
+  Original plan
+    1. Break out the letters into an array
+      1.1 Transform into lowercase
+    2. Compare the arrays and return index position 
+    3. Convert the letters to objects
+      3.1 Give the letters the right attribute
+    4. Return the guess
 
+  How it actually turned out
+    1. Break out the letters into an array
+      1.1 Transform into lowercase
+      1.2 Create class to create new result objects
+    2. Compare the arrays and return the index position and
+      2.1 Convert letters to objects with a class and asign result attribute
+
+    
+    1111111. Return the guess
 */

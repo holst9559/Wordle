@@ -1,6 +1,6 @@
 export class checkGuess {
-  constructor(letter, index) {
+  constructor(letter, result) {
     this.letter = letter;
-    this.index = index;
+    this.result = result;
   }
 }
