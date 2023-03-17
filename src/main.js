@@ -1,1 +1,0 @@
-import algoA from "./algorithmA";
