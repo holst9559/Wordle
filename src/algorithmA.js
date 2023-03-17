@@ -1,63 +1,61 @@
-import { checkGuess } from "./guessObject";
+import { guessObject } from "./guessObject";
 
-export default function algoA(guess, answer) {
-  //New array to store the objects in
-  const resultArray = [new Array(guess.length)];
+export default function algoA(guessInput, answerInput) {
+  const resultArray = [new Array(guessInput.length)];
 
-  //Converting both guess and the answer to lowercase
-  const humanGuess = guess.toLowerCase();
-  const word = answer.toLowerCase();
+  const guess = guessInput.toLowerCase();
+  const answer = answerInput.toLowerCase();
 
-  //Making the words into arrays
-  const guessWord = humanGuess.split("");
-  const wordArray = word.split("");
+  const guessArray = guess.split("");
+  const answerArray = answer.split("");
 
   const internalArray = [];
 
-  //Sets the index attributes on the letters
-  let indexCheck = "";
+  if (guessInput.length !== answerInput.length) {
+    return error(
+      "Input is not the correct length, write a word containing 5 letters"
+    );
+  }
 
   //Loop to check if the position of the guess matches the answer
-  for (let i = 0; i < wordArray.length; i++) {
-    let letterPosition = wordArray.indexOf(guessWord[i]);
-    let letterCheck = guessWord[i];
+  for (let i = 0; i < answerArray.length; i++) {
+    resultArray[i] = new guessObject(guessArray[i], "Incorrect");
 
-    //Checks if there is any matching letters
-    if (letterPosition === -1) {
-      indexCheck = "Incorrect";
-    } else {
-      //Checks if there is an exact match
-      if (letterCheck === wordArray[i]) {
-        indexCheck = "Correct";
-      }
-      //Checks if there is a duplicate or not
-      else if (internalArray.includes(letterCheck)) {
-        for (let j = i; j < wordArray.length; j++) {
-          if (wordArray[j] !== letterCheck && j == wordArray.length - 1) {
-            indexCheck = "Misplaced";
-          } else if (wordArray[j] !== letterCheck) {
-            console.log(i);
-            console.log(j);
-            indexCheck = "Incorrect";
-          }
-        }
-      }
-      //Checks if the letter is misplaced
-      else if (
-        wordArray.includes(letterCheck) &&
-        !internalArray.includes(letterCheck)
-      ) {
-        indexCheck = "Misplaced";
-      }
+    //Checks if there is an exact match and adds the correct result
+    if (guessArray[i] === answerArray[i]) {
+      resultArray[i].result = "Correct";
     }
 
-    //Internal array to check if the letter exists in the array of already checked letters
-    //Did this instead of filtering the object
-    const internalResult = guessWord[i];
+    let internalResult = guessArray[i];
     internalArray.push(internalResult);
-
-    const result = new checkGuess(guessWord[i], indexCheck);
-    resultArray[i] = result;
   }
+
+  //Loops over the interalArray to see if
+  //any of the letters and misplaced or not
+  let duplicateCounter = 0;
+  let matchCounter = 0;
+
+  for (let i = 0; i < internalArray.length; i++) {
+    if (answerArray.includes(internalArray[i])) {
+      resultArray.forEach((letter) => {
+        if (letter.letter == guessArray[i]) {
+          duplicateCounter++;
+        }
+      });
+
+      resultArray.forEach((result) => {
+        if (result.letter == guessArray[i] && result.result == "Correct") {
+          matchCounter++;
+        }
+      });
+
+      if (matchCounter < duplicateCounter && matchCounter == 0) {
+        resultArray[i].result = "Misplaced";
+      }
+    }
+    duplicateCounter = 0;
+    matchCounter = 0;
+  }
+
   return resultArray;
 }
