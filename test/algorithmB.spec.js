@@ -3,10 +3,6 @@ import algoB from "../src/algorithmB";
 import { toBeOneOf } from "jest-extended/all";
 
 describe("algoB()", () => {
-  const wordListInput = ["Katt", "Mage", "Kaffe", "Svart", "Melass", "Enbart"];
-
-  //Tests to see if the sorting logic work as intended
-
   it("Returns an array with words that has correct length", () => {
     const result = algoB(
       ["Katt", "Mats", "Svart", "kaffe", "Enbart", "Hyperaktiv"],

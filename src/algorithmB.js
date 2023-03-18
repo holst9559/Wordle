@@ -9,8 +9,10 @@ export default function algoB(
   let wordLength = wordLengthInput;
   let repeatLetter = repeatLetterInput;
 
+  //Arrays to store words that match the length and
+  //words that match the requirement for unique characters
   const wordArray = [];
-  const resultArray = [];
+  const uniqueArray = [];
 
   for (let i = 0; i < wordList.length; i++) {
     if (wordList[i].length == wordLength) {
@@ -21,19 +23,19 @@ export default function algoB(
   for (let i = 0; i < wordArray.length; i++) {
     if (repeatLetter == false) {
       if (duplicateLetters(wordArray[i]) !== repeatLetter) {
-        resultArray.push(wordArray[i]);
+        uniqueArray.push(wordArray[i]);
       }
     } else {
-      resultArray.push(wordArray[i]);
+      uniqueArray.push(wordArray[i]);
     }
   }
 
-  let randomResult = Math.floor(Math.random() * resultArray.length);
-  let resultArrayRandom = resultArray[randomResult];
+  let randomResult = Math.floor(Math.random() * uniqueArray.length);
+  let resultArray = uniqueArray[randomResult];
 
-  if (resultArrayRandom == null) {
+  if (resultArray == null) {
     return "Error! No matching words, try again with different variables";
   } else {
-    return resultArrayRandom;
+    return resultArray;
   }
 }
