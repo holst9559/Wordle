@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@jest/globals";
-import algoA from "../src/algorithmA";
+import algoA from "../src/guessingGame";
 
 /* 
   Test strategi

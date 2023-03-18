@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@jest/globals";
-import algoB from "../src/algorithmB";
+import algoB from "../src/randomWord";
 import { toBeOneOf } from "jest-extended/all";
 
 describe("algoB()", () => {
