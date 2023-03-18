@@ -1,10 +1,4 @@
-/*
-const wordList = ["Katt", "Mage", "Kaffe", "Svart", "Melass", "Enbart"];
-const wordLength = 5;
-const repeatLetter = true;
-*/
-
-import { ConsoleWriter } from "istanbul-lib-report";
+import duplicateLetters from "./duplicateLetters";
 
 export default function algoB(
   wordListInput,
@@ -14,17 +8,32 @@ export default function algoB(
   let wordList = wordListInput;
   let wordLength = wordLengthInput;
   let repeatLetter = repeatLetterInput;
-  console.log(wordList[0].length);
 
-  const uniqueArray = [];
+  const wordArray = [];
   const resultArray = [];
 
   for (let i = 0; i < wordList.length; i++) {
-    console.log(wordList[i]);
     if (wordList[i].length == wordLength) {
-      resultArray.push(wordList[i]);
+      wordArray.push(wordList[i].toLowerCase());
     }
   }
 
-  return resultArray;
+  for (let i = 0; i < wordArray.length; i++) {
+    if (repeatLetter == false) {
+      if (duplicateLetters(wordArray[i]) !== repeatLetter) {
+        resultArray.push(wordArray[i]);
+      }
+    } else {
+      resultArray.push(wordArray[i]);
+    }
+  }
+
+  let randomResult = Math.floor(Math.random() * resultArray.length);
+  let resultArrayRandom = resultArray[randomResult];
+
+  if (resultArrayRandom == null) {
+    return "Error! No matching words, try again with different variables";
+  } else {
+    return resultArrayRandom;
+  }
 }

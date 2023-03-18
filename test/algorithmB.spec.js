@@ -1,16 +1,39 @@
 import { describe, expect, it } from "@jest/globals";
 import algoB from "../src/algorithmB";
+import { toBeOneOf } from "jest-extended/all";
 
 describe("algoB()", () => {
   const wordListInput = ["Katt", "Mage", "Kaffe", "Svart", "Melass", "Enbart"];
-  const wordLengthInput = 5;
-  const repeatLetterInput = true;
+
+  //Tests to see if the sorting logic work as intended
 
   it("Returns an array with words that has correct length", () => {
-    const result = algoB(wordListInput, wordLengthInput, repeatLetterInput);
+    const result = algoB(
+      ["Katt", "Mats", "Svart", "kaffe", "Enbart", "Hyperaktiv"],
+      5,
+      true
+    );
+    expect(result).toBeOneOf(["kaffe", "svart"]);
+  });
 
-    console.log(result);
-    expect(result[0]).toBe("Kaffe");
-    expect(result[1]).toBe("Svart");
+  it("Returns an array with words with no duplicate letters", () => {
+    const result = algoB(["Katt", "Svart", "Kaffe", "Enbart"], 5, false);
+    expect(result).toBe("svart");
+  });
+
+  it("Returns an array with words with duplicate letters", () => {
+    const result = algoB(["Kaffe"], 5, true);
+    expect(result).toBe("kaffe");
+  });
+
+  it("Returns an error message if no matching word is found", () => {
+    const result = algoB(
+      ["Katt", "Mats", "Kaffe", "Enbart", "Melass"],
+      5,
+      false
+    );
+    expect(result).toBe(
+      "Error! No matching words, try again with different variables"
+    );
   });
 });
